@@ -3,7 +3,28 @@ import matplotlib.pyplot as plt
 
 
 def visualize_frames(clip, dxs, dys, t0=0, t0_len=1, exact_frames=None):
+    """
+    Visualize frames in clip, and superimpose markers given by dxs and dxy.
 
+    Inputs:
+    -------
+    :param clip: VideoClip class from moviepy
+        See moviepy VideoClip documentation for details
+    :param dxs: (D, T) array
+    :param dys: (D, T) array
+    :param t0: int
+        index of minimum frame to plot
+    :param t0_len: int
+        length of frames to plot
+    :param exact_frames: None or list
+        if list, plot frames in exact_frames.
+            if t0_len > 1,  selects subset of frames to plot from exact_frames
+            else plots all frames in exact_frames
+        if None:
+            plots frames in range(t0, t0 + t0_len)
+    :return:
+        makes plot
+    """
     xlim, ylim = clip.size
     fps = clip.fps
     if np.ndim(dxs) == 1:
