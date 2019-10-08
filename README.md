@@ -2,11 +2,9 @@
 
 Wrapper to run preprocessing/modeling steps in data from IBL
 
-To install run
+To install run:
 
-.. code-block:: shell
-
-    git clone https://github.com/ekellbuch/ibl_tools/.git
+    git clone https://github.com/ekellbuch/ibl_tools.git
     cd ibl_tools
     pip install -e .
     
