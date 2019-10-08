@@ -11,3 +11,10 @@ To install run
     pip install -e .
     
 Note: This code has only been tested on Ubuntu 18.04.
+
+
+Dependencies
+------------
+
+* [BEHDATA](https://github.com/ekellbuch/behdata)
+
