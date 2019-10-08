@@ -8,10 +8,14 @@ from ibl_tools.util_files import (
     get_dir_files,
     search_str_files,
     extract_group_to_individual_class,
-    get_attributes_class_list,
+    get_bodyparts_attributes_as_array,
 )
 
 from moviepy.editor import VideoFileClip
+
+
+# Path where data is located
+BASEPATH = ''
 
 
 class ExperimentNames(object):
@@ -21,7 +25,7 @@ class ExperimentNames(object):
 
     def __init__(self):
         # directory where experiments are stored
-        self.DIR_INPUT = "/data/ibl/dlc-networks"
+        self.DIR_INPUT = os.path.join(BASEPATH, "data/ibl/dlc-networks")
         self.DIR_PART = "paws-mic-2019-04-26/videos_small"
 
         # extensions of video files and tracking data
@@ -83,7 +87,8 @@ class ExperimentFiles(object):
     def __init__(self, experiment_name, subject_id):
         self.EXPERIMENT_NAME = experiment_name
         # directory where experiments are stored
-        self.DIR_INPUT = "/data/ibl/dlc-networks"
+        self.DIR_INPUT = os.path.join(BASEPATH, "data/ibl/dlc-networks")
+        print(self.DIR_INPUT)
 
         # invididual body part
         self.DIR_PART = "paws-mic-2019-04-26/videos_small"
@@ -204,7 +209,7 @@ class ExperimentFiles(object):
         else:
             raise ("We don" "t have that data")
 
-        right_paw = TrackedGroup(*get_attributes_class_list(RightPaw))
+        right_paw = TrackedGroup(*get_bodyparts_attributes_as_array(RightPaw))
 
         if as_array:
             namer, xr, yr, lr = (
