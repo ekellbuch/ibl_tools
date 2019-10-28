@@ -9,7 +9,7 @@ import alf.io
 from ibl_tools.core_classes import TrackedPoint
 
 
-def extract_group_to_individual_class(df, parts_group, df_body_parts):
+def extract_group_to_individual_class(df, parts_group, df_body_parts, verbose=True):
     """
     Extract multiple keys from dataframe and combine them in a trackedgroup
     Inputs:
@@ -20,12 +20,12 @@ def extract_group_to_individual_class(df, parts_group, df_body_parts):
     """
     parts_group_label = list(filter(lambda x: re.match(parts_group, x), df_body_parts))
 
-    print(parts_group_label)
-    print(
+    if verbose:
+        print(parts_group_label)
+        print(
         "\nParts in group: ' {} ': \n".format(parts_group)
-        + "\n".join(parts_group_label)
-    )
-
+            + "\n".join(parts_group_label)
+        )
     g = lambda bodypart: TrackedPoint(bodypart, *read_vals_key(df, bodypart))
 
     return list(map(g, parts_group_label))
@@ -176,3 +176,20 @@ def load_dlc(folder_path, camera="left"):
     dlc_dict["sampling_rate"] = 1 / np.mean(np.diff(timestamps))
 
     return dlc_dict
+
+
+
+def filter_str_from_str_list(string_filter, list_strings, unique=True):
+    """
+    Filter strings in list based on my_string
+    similar to list(filter(lambda x: re.search(subject_name, x), FNAMES_RAW))
+    
+    """
+    string_matches = list(filter(lambda k: string_filter in k, list_strings))
+    
+    if unique:
+        assert len(string_matches) == 1
+        string_matches = string_matches[0]
+
+    return string_matches
+
