@@ -5,7 +5,6 @@ Files to load ibl data
 import re
 import os
 import numpy as np
-import alf.io
 from ibl_tools.core_classes import TrackedPoint
 
 
@@ -135,6 +134,7 @@ def get_group_bodyparts(
 
 
 def load_dlc(folder_path, camera="left"):
+    import alf.io
     """
     Load in DLC traces and timestamps from FPGA and align them
 
