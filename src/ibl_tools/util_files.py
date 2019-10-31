@@ -22,7 +22,7 @@ def extract_group_to_individual_class(df, parts_group, df_body_parts, verbose=Tr
     if verbose:
         print(parts_group_label)
         print(
-        "\nParts in group: ' {} ': \n".format(parts_group)
+            "\nParts in group: ' {} ': \n".format(parts_group)
             + "\n".join(parts_group_label)
         )
     g = lambda bodypart: TrackedPoint(bodypart, *read_vals_key(df, bodypart))
@@ -43,11 +43,10 @@ def read_vals_key(df, body_part):
         name of body part
     :return:
         x: array
-            x 
+            x
         y: array
         likelihood: array
     """
-    # s=df[(df.keys()[0][0], 'pupil_top_r', 'x')].values
     x = df[df.keys()[0][0], body_part, "x"].values
     y = df[df.keys()[0][0], body_part, "y"].values
     likelihood = df[df.keys()[0][0], body_part, "likelihood"].values
@@ -59,8 +58,8 @@ def get_dir_files(dir):
     Get files in directory
     Args:
         dir: directory
-    Returns: 
-    
+    Returns:
+
     filenames:
         files in directory
     """
@@ -135,6 +134,7 @@ def get_group_bodyparts(
 
 def load_dlc(folder_path, camera="left"):
     import alf.io
+
     """
     Load in DLC traces and timestamps from FPGA and align them
 
@@ -178,18 +178,16 @@ def load_dlc(folder_path, camera="left"):
     return dlc_dict
 
 
-
 def filter_str_from_str_list(string_filter, list_strings, unique=True):
     """
     Filter strings in list based on my_string
     similar to list(filter(lambda x: re.search(subject_name, x), FNAMES_RAW))
-    
+
     """
     string_matches = list(filter(lambda k: string_filter in k, list_strings))
-    
+
     if unique:
         assert len(string_matches) == 1
         string_matches = string_matches[0]
 
     return string_matches
-
